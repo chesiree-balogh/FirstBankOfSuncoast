@@ -25,24 +25,19 @@ namespace FirstBankOfSuncoast
       Console.WriteLine("Welcome to First Bank of Suncoast");
 
       var accounts = new List<Account>();
+      accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
+      accounts.Add(new Account { AccountType = "Saving", Amount = 0 });
 
       var reader = new StreamReader("accounts.csv");
       var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
       accounts = csvReader.GetRecords<Account>().ToList();
 
+      AccountsManager.DisplayAccounts(accounts);
+
 
       var isRunning = true;
       while (isRunning)
       {
-        //display current account balances
-        foreach (var Account in accounts)
-        {
-          Console.WriteLine($"Your current Checking balance is:{Account.Checking}");
-          Console.WriteLine($"& your current Savings balance is:{Account.Saving}");
-        }
-
-
-
         Console.WriteLine("What would you like to do? (A)dd funds, (W)ithdrawl funds, (T)ransfer funds, or (Q)iut?");
         var input = Console.ReadLine().ToLower();
         if (input == "a")
