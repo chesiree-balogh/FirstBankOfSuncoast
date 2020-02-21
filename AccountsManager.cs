@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FirstBankOfSuncoast
 {
   public class AccountsManager
   {
     public List<Account> accounts { get; set; } = new List<Account>();
+
+
 
     public static void DisplayAccounts(List<Account> accounts)
     {
@@ -16,41 +19,52 @@ namespace FirstBankOfSuncoast
     }
 
     //deposit "add" funds
-    public static void Adding(string AccountType, int Amount)
+    public void Adding(string AccountType, double Amount)
     {
-      //var add = Accounts
+      var account = accounts.First(accounts => accounts.AccountType == AccountType).Amount;
+      account += Amount;
+      accounts.First(account => account.AccountType == AccountType).Amount = account;
     }
 
-
-
-
-
-
     //withdraw
-
-    //transfer
-
-    //transation history
-    // public string GetAccountHistory()
-    // {
-    //     var report = new System.Text.StringBuilder();
-
-    //     decimal balance = 0;
-    //     report.AppendLine("Date\t\tAmount\tBalance\tNote");
-    //     foreach (var item in allTransactions)
-    //     {
-    //         balance += item.Amount;
-    //         report.AppendLine($"{item.Date.ToShortDateString()}\t{item.Amount}\t{balance}\t{item.Notes}");
-    //     }
-
-    //     return report.ToString();
-    // }
-    //Console.WriteLine(account.GetAccountHistory());
-
-
-
+    public void Withdraw(string AccountType, double Amount)
+    {
+      var account = accounts.First(accounts => accounts.AccountType == AccountType).Amount;
+      account -= Amount;
+      accounts.First(account => account.AccountType == AccountType).Amount = account;
+    }
   }
 }
+
+
+
+
+
+
+
+//transfer
+
+//transation history
+// public string GetAccountHistory()
+// {
+//     var report = new System.Text.StringBuilder();
+
+//     decimal balance = 0;
+//     report.AppendLine("Date\t\tAmount\tBalance\tNote");
+//     foreach (var item in allTransactions)
+//     {
+//         balance += item.Amount;
+//         report.AppendLine($"{item.Date.ToShortDateString()}\t{item.Amount}\t{balance}\t{item.Notes}");
+//     }
+
+//     return report.ToString();
+// }
+//Console.WriteLine(account.GetAccountHistory());
+
+
+
+
+
 
 
 

@@ -4,7 +4,7 @@ namespace FirstBankOfSuncoast
   {
     public string AccountType { get; set; }
 
-    public int Amount { get; set; }
+    public double Amount { get; set; }
 
   }
 }

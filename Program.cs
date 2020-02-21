@@ -10,7 +10,6 @@ namespace FirstBankOfSuncoast
   class Program
   {
 
-
     static void SaveAccounts(List<Account> accounts)
     {
       var writer = new StreamWriter("accounts.csv");
@@ -22,10 +21,10 @@ namespace FirstBankOfSuncoast
     static void Main(string[] args)
     {
       Console.WriteLine("Welcome to First Bank of Suncoast");
-
+      var accountsManager = new AccountsManager();
       var accounts = new List<Account>();
-      //accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
-      //accounts.Add(new Account { AccountType = "Saving", Amount = 0 });
+      accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
+      accounts.Add(new Account { AccountType = "Saving", Amount = 0 });
 
       var reader = new StreamReader("accounts.csv");
       var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
@@ -47,20 +46,34 @@ namespace FirstBankOfSuncoast
 
         Console.WriteLine("What would you like to do? (A)dd funds, (W)ithdrawl funds, (T)ransfer funds, or (Q)iut?");
         var input = Console.ReadLine().ToLower();
+
+
+
+
         if (input == "a")
         {
           Console.WriteLine("which account would you like to add to? (C)hecking or (S)aving");
           var add = Console.ReadLine().ToLower();
           if (add == "c")
           {
+            Console.WriteLine("how much?");
+            var deposit = double.Parse(Console.ReadLine());
+            accountsManager.Adding("Checking", deposit);
 
+            SaveAccounts(accounts);
           }
           else if (add == "s")
           {
+            Console.WriteLine("how much?");
+            var deposit = double.Parse(Console.ReadLine());
+            accountsManager.Adding("Saving", deposit);
 
+            SaveAccounts(accounts);
           }
           SaveAccounts(accounts);
         }
+
+
 
 
         else if (input == "w")
@@ -69,31 +82,36 @@ namespace FirstBankOfSuncoast
           var withdrawl = Console.ReadLine().ToLower();
           if (withdrawl == "c")
           {
+            Console.WriteLine("how much?");
+            var withdrawlFunds = double.Parse(Console.ReadLine());
+            accountsManager.Withdraw("Checking", withdrawlFunds);
 
+            SaveAccounts(accounts);
           }
           else if (withdrawl == "s")
           {
+            Console.WriteLine("how much?");
+            var withdrawlFunds = double.Parse(Console.ReadLine());
+            accountsManager.Withdraw("Saving", withdrawlFunds);
 
+            SaveAccounts(accounts);
           }
           SaveAccounts(accounts);
         }
 
 
+
+        //transfer
         else if (input == "t")
         {
           Console.WriteLine("which account would you like to transfer to? (C)hecking or (S)aving");
           var transfer = Console.ReadLine().ToLower();
-          if (transfer == "c")
-          {
 
-          }
-          else if (transfer == "s")
-          {
-
-          }
           SaveAccounts(accounts);
         }
 
+
+        //quit
         else if (input == "q")
         {
           isRunning = false;
