@@ -11,7 +11,6 @@ namespace FirstBankOfSuncoast
   {
 
 
-
     static void SaveAccounts(List<Account> accounts)
     {
       var writer = new StreamWriter("accounts.csv");
@@ -25,8 +24,8 @@ namespace FirstBankOfSuncoast
       Console.WriteLine("Welcome to First Bank of Suncoast");
 
       var accounts = new List<Account>();
-      accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
-      accounts.Add(new Account { AccountType = "Saving", Amount = 0 });
+      //accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
+      //accounts.Add(new Account { AccountType = "Saving", Amount = 0 });
 
       var reader = new StreamReader("accounts.csv");
       var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
@@ -34,10 +33,18 @@ namespace FirstBankOfSuncoast
 
       AccountsManager.DisplayAccounts(accounts);
 
+      //******************************
+      //Console.WriteLine("which account are we working with? (Check)ing, (Sav)ing, or (Q)uit");
+      //string accountType = Console.ReadLine();
+
+      //Console.Write("Would you like to (Dep) -Deposit or (With) -Withdraw)?");
+      //string depositwithdrawl = Console.ReadLine();
+
 
       var isRunning = true;
       while (isRunning)
       {
+
         Console.WriteLine("What would you like to do? (A)dd funds, (W)ithdrawl funds, (T)ransfer funds, or (Q)iut?");
         var input = Console.ReadLine().ToLower();
         if (input == "a")
@@ -52,6 +59,7 @@ namespace FirstBankOfSuncoast
           {
 
           }
+          SaveAccounts(accounts);
         }
 
 
@@ -67,6 +75,7 @@ namespace FirstBankOfSuncoast
           {
 
           }
+          SaveAccounts(accounts);
         }
 
 
@@ -82,6 +91,7 @@ namespace FirstBankOfSuncoast
           {
 
           }
+          SaveAccounts(accounts);
         }
 
         else if (input == "q")
@@ -89,7 +99,7 @@ namespace FirstBankOfSuncoast
           isRunning = false;
         }
 
-
+        SaveAccounts(accounts);
 
       }
 
