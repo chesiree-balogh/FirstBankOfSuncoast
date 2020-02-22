@@ -28,7 +28,7 @@ namespace FirstBankOfSuncoast
     }
 
 
-    public static void DisplayAccounts(List<Account> accounts)
+    public void DisplayAccounts()
     {
       foreach (var account in accounts)
       {

@@ -15,19 +15,21 @@ namespace FirstBankOfSuncoast
       Console.WriteLine("Welcome to First Bank of Suncoast");
 
 
+
       var accountsManager = new AccountsManager();
       accountsManager.LoadAccounts();
-
-      var accounts = new List<Account>();
-      accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
-      accounts.Add(new Account { AccountType = "Saving", Amount = 0 });
-      AccountsManager.DisplayAccounts(accounts);
 
 
       var isRunning = true;
       while (isRunning)
       {
 
+        Console.WriteLine("=================================");
+
+        var accounts = new List<Account>();
+        accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
+        accounts.Add(new Account { AccountType = "Saving", Amount = 0 });
+        accountsManager.DisplayAccounts();
 
         Console.WriteLine("What would you like to do? (A)dd funds, (W)ithdrawl funds, (T)ransfer funds, or (Q)iut?");
         var input = Console.ReadLine().ToLower();
