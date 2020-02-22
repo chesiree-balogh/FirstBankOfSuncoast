@@ -9,22 +9,18 @@ namespace FirstBankOfSuncoast
 {
   class Program
   {
-
     static void Main(string[] args)
     {
       Console.WriteLine("Welcome to First Bank of Suncoast");
 
-      //
-
       var accountsManager = new AccountsManager();
       accountsManager.LoadAccounts();
-
 
       var isRunning = true;
       while (isRunning)
       {
 
-        Console.WriteLine("=================================");
+        Console.WriteLine("=======================================");
 
         var accounts = new List<Account>();
         accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
@@ -33,9 +29,6 @@ namespace FirstBankOfSuncoast
 
         Console.WriteLine("What would you like to do? (A)dd funds, (W)ithdrawl funds, (T)ransfer funds, or (Q)iut?");
         var input = Console.ReadLine().ToLower();
-
-
-
 
         if (input == "a")
         {
@@ -54,9 +47,6 @@ namespace FirstBankOfSuncoast
             accountsManager.Adding("Saving", deposit);
           }
         }
-
-
-
 
         else if (input == "w")
         {
@@ -81,20 +71,29 @@ namespace FirstBankOfSuncoast
         //transfer
         else if (input == "t")
         {
-          Console.WriteLine("which account would you like to transfer to? (C)hecking or (S)aving");
+          Console.WriteLine("which account would you like to transfer? (Checking) or (Saving)");
           var transfer = Console.ReadLine().ToLower();
+          if (transfer == "checking")
+          {
+            Console.WriteLine("how much?");
+            var transChecking = double.Parse(Console.ReadLine());
+            accountsManager.Transfer(transfer, transChecking);
+          }
+          else if (transfer == "saving")
+          {
+            Console.WriteLine("how much?");
+            var transSaving = double.Parse(Console.ReadLine());
+            accountsManager.Transfer(transfer, transSaving);
+          }
         }
-
 
         //quit
         else if (input == "q")
         {
           isRunning = false;
         }
-
       }
       accountsManager.SaveAccounts();
-
     }
   }
 }

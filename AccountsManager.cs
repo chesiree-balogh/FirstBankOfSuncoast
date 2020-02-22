@@ -51,38 +51,29 @@ namespace FirstBankOfSuncoast
       account -= Amount;
       accounts.First(account => account.AccountType == AccountType).Amount = account;
     }
+
+
+    //transfer
+    public void Transfer(string AccountType, double Amount)
+    {
+      if (AccountType == "checking")
+      {
+        var withdrawFrom = accounts.First(accounts => accounts.AccountType == AccountType).Amount;
+        withdrawFrom -= Amount;
+        accounts.First(accounts => accounts.AccountType == AccountType).Amount = withdrawFrom;
+        var depositTo = accounts.First(accounts => accounts.AccountType == "checking").Amount;
+        depositTo += Amount;
+        accounts.First(accounts => accounts.AccountType == "checking").Amount = depositTo;
+      }
+      else if (AccountType == "saving")
+      {
+        var withdrawFrom = accounts.First(accounts => accounts.AccountType == AccountType).Amount;
+        withdrawFrom -= Amount;
+        accounts.First(accounts => accounts.AccountType == AccountType).Amount = withdrawFrom;
+        var depositTo = accounts.First(accounts => accounts.AccountType == "saving").Amount;
+        depositTo += Amount;
+        accounts.First(accounts => accounts.AccountType == "saving").Amount = depositTo;
+      }
+    }
   }
 }
-
-
-
-
-
-
-
-//transfer
-
-//transation history
-// public string GetAccountHistory()
-// {
-//     var report = new System.Text.StringBuilder();
-
-//     decimal balance = 0;
-//     report.AppendLine("Date\t\tAmount\tBalance\tNote");
-//     foreach (var item in allTransactions)
-//     {
-//         balance += item.Amount;
-//         report.AppendLine($"{item.Date.ToShortDateString()}\t{item.Amount}\t{balance}\t{item.Notes}");
-//     }
-
-//     return report.ToString();
-// }
-//Console.WriteLine(account.GetAccountHistory());
-
-
-
-
-
-
-
-
