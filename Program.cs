@@ -23,8 +23,8 @@ namespace FirstBankOfSuncoast
         Console.WriteLine("=======================================");
 
         var accounts = new List<Account>();
-        accounts.Add(new Account { AccountType = "checking", Amount = 0 });
-        accounts.Add(new Account { AccountType = "saving", Amount = 0 });
+        accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
+        accounts.Add(new Account { AccountType = "Saving", Amount = 0 });
         accountsManager.DisplayAccounts();
 
         Console.WriteLine("What would you like to do? (A)dd funds, (W)ithdrawl funds, (T)ransfer funds, or (Q)iut?");
@@ -66,18 +66,22 @@ namespace FirstBankOfSuncoast
           }
         }
 
-
+        /////////////////////////
+        /////////////////////////
+        /////////////////////////
 
         //transfer
         else if (input == "t")
         {
-          Console.WriteLine("which account would you like to transfer? (Checking) or (Saving)");
+          Console.WriteLine("which account would you like to transfer from? (Checking) or (Saving)");
           var transfer = Console.ReadLine().ToLower();
           if (transfer == "checking")
           {
             Console.WriteLine("how much?");
             var transChecking = double.Parse(Console.ReadLine());
-            accountsManager.Transfer("Checking", transChecking);
+            accountsManager.Adding("Saving", transChecking);
+            accountsManager.Withdraw("Checking", transChecking);
+            //accountsManager.Transfer("Checking", transChecking);
           }
           //error on line 80
 
@@ -85,7 +89,9 @@ namespace FirstBankOfSuncoast
           {
             Console.WriteLine("how much?");
             var transSaving = double.Parse(Console.ReadLine());
-            accountsManager.Transfer("Saving", transSaving);
+            accountsManager.Adding("Checking", transSaving);
+            accountsManager.Withdraw("Saving", transSaving);
+            //accountsManager.Transfer("Saving", transSaving);
           }
         }
 
