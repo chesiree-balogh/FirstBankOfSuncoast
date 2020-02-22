@@ -23,8 +23,8 @@ namespace FirstBankOfSuncoast
         Console.WriteLine("=======================================");
 
         var accounts = new List<Account>();
-        accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
-        accounts.Add(new Account { AccountType = "Saving", Amount = 0 });
+        accounts.Add(new Account { AccountType = "checking", Amount = 0 });
+        accounts.Add(new Account { AccountType = "saving", Amount = 0 });
         accountsManager.DisplayAccounts();
 
         Console.WriteLine("What would you like to do? (A)dd funds, (W)ithdrawl funds, (T)ransfer funds, or (Q)iut?");
@@ -77,13 +77,15 @@ namespace FirstBankOfSuncoast
           {
             Console.WriteLine("how much?");
             var transChecking = double.Parse(Console.ReadLine());
-            accountsManager.Transfer(transfer, transChecking);
+            accountsManager.Transfer("Checking", transChecking);
           }
+          //error on line 80
+
           else if (transfer == "saving")
           {
             Console.WriteLine("how much?");
             var transSaving = double.Parse(Console.ReadLine());
-            accountsManager.Transfer(transfer, transSaving);
+            accountsManager.Transfer("Saving", transSaving);
           }
         }
 
