@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using CsvHelper;
 
 namespace FirstBankOfSuncoast
 {
@@ -8,6 +11,21 @@ namespace FirstBankOfSuncoast
   {
     public List<Account> accounts { get; set; } = new List<Account>();
 
+    public void LoadAccounts()
+    {
+      var reader = new StreamReader("accounts.csv");
+      var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+      accounts = csvReader.GetRecords<Account>().ToList();
+    }
+
+
+    public void SaveAccounts()
+    {
+      var writer = new StreamWriter("accounts.csv");
+      var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
+      csvWriter.WriteRecords(accounts);
+      writer.Flush();
+    }
 
 
     public static void DisplayAccounts(List<Account> accounts)
